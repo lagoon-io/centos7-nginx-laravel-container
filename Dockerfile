@@ -1,8 +1,6 @@
 FROM centos:centos7
 
 # composer設定
-# ENV COMPOSER_HOME="/usr/local/bin/composer"
-# ENV COMPOSER_ALLOW_SUPERUSER=1
 ENV PATH="$PATH:/opt/composer/vendor/bin"
 # composer update、install時のメモリ上限を無効化
 ENV COMPOSER_MEMORY_LIMIT=-1
