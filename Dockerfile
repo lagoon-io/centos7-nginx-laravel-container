@@ -36,6 +36,7 @@ RUN yum update -y \
   && sed -e 's/#PermitRootLogin yes/PermitRootLogin yes/' /etc/ssh/sshd_config \
   && sed -e 's/UsePAM yes/UsePAM no/' /etc/ssh/sshd_config \
   && sed -e 's/#PermitEmptyPasswords no/PermitEmptyPasswords yes/' /etc/ssh/sshd_config \
+  && passwd -d root \
   && usermod -a -G root apache \
   && usermod -a -G root nginx
 
