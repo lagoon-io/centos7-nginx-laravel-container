@@ -12,7 +12,7 @@ services:
     privileged: true
     ports:
       - '8080:80'
-      - '9001:9001'
+      - '9011:9001'
       - '22011:22'
     volumes:
       - './conf/nginx/default.conf:/etc/nginx/conf.d/default.conf'
