@@ -33,9 +33,9 @@ RUN yum update -y \
   && sed -e 's/user = apache/user = nginx/' /etc/php-fpm.d/www.conf \
   && sed -e 's/group = apache/group = nginx/' /etc/php-fpm.d/www.conf \
   # ルートログインの有効化(ノーパス)
-  && sed -e 's/#PermitRootLogin yes/PermitRootLogin yes' /etc/ssh/sshd_config \
-  && sed -e 's/UsePAM yes/UsePAM no' /etc/ssh/sshd_config \
-  && sed -e 's/#PermitEmptyPasswords no/PermitEmptyPasswords yes' /etc/ssh/sshd_config \
+  && sed -e 's/#PermitRootLogin yes/PermitRootLogin yes/' /etc/ssh/sshd_config \
+  && sed -e 's/UsePAM yes/UsePAM no/' /etc/ssh/sshd_config \
+  && sed -e 's/#PermitEmptyPasswords no/PermitEmptyPasswords yes/' /etc/ssh/sshd_config \
   && usermod -a -G root apache \
   && usermod -a -G root nginx
 
