@@ -30,12 +30,12 @@ RUN yum update -y \
   # アプリケーションマウントポイント作成
   && mkdir /var/www/app/ && chmod 775 -R /var/www/ \
   # php-fpmの設定をApacheからNginxに変更
-  && sed -e 's/user = apache/user = nginx/' /etc/php-fpm.d/www.conf \
-  && sed -e 's/group = apache/group = nginx/' /etc/php-fpm.d/www.conf \
+  && sed -i -e 's/user = apache/user = nginx/' /etc/php-fpm.d/www.conf \
+  && sed -i -e 's/group = apache/group = nginx/' /etc/php-fpm.d/www.conf \
   # ルートログインの有効化(ノーパス)
-  && sed -e 's/#PermitRootLogin yes/PermitRootLogin yes/' /etc/ssh/sshd_config \
-  && sed -e 's/UsePAM yes/UsePAM no/' /etc/ssh/sshd_config \
-  && sed -e 's/#PermitEmptyPasswords no/PermitEmptyPasswords yes/' /etc/ssh/sshd_config \
+  && sed -i -e 's/#PermitRootLogin yes/PermitRootLogin yes/' /etc/ssh/sshd_config \
+  && sed -i -e 's/UsePAM yes/UsePAM no/' /etc/ssh/sshd_config \
+  && sed -i -e 's/#PermitEmptyPasswords no/PermitEmptyPasswords yes/' /etc/ssh/sshd_config \
   && passwd -d root \
   && usermod -a -G root apache \
   && usermod -a -G root nginx
