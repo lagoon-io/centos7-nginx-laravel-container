@@ -28,7 +28,11 @@ RUN yum update -y \
   && yum install -y gcc \
   && pecl install xdebug-2.2.7 \
   # アプリケーションマウントポイント作成
-  && mkdir /var/www/app/ && chmod 777 -R /var/www/
+  && mkdir /var/www/app/ && chmod 775 -R /var/www/ \
+  && sed -e 's/user = apache/user = nginx/' /etc/php-fpm.d/www.conf \
+  && sed -e 's/group = apache/group = nginx/' /etc/php-fpm.d/www.conf \
+  && usermod -a -G root apache \
+  && usermod -a -G root nginx
 
 # 各種サービス起動
 RUN systemctl enable sshd.service \
