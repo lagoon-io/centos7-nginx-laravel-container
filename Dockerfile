@@ -8,6 +8,8 @@ ENV COMPOSER_MEMORY_LIMIT=-1
 # RHELのリポジトリに追加してやらないとインストールできないので追加
 COPY ./conf/nginx/repo/nginx.repo /etc/yum.repos.d/nginx.repo
 
+COPY ./docker-bootstrap.sh /docker-bootstrap.sh
+
 # マルチステージビルド
 # composer 公式イメージからcomposerを移植
 COPY --from=composer:1.8.6 /usr/bin/composer /usr/bin/composer
@@ -38,7 +40,11 @@ RUN yum update -y \
   && sed -i -e 's/#PermitEmptyPasswords no/PermitEmptyPasswords yes/' /etc/ssh/sshd_config \
   && passwd -d root \
   && usermod -a -G root apache \
-  && usermod -a -G root nginx
+  && usermod -a -G root nginx \
+  && chmod +x /etc/rc.local \
+  && chmod +x /etc/rc.d/rc.local \
+  && chmod +x /docker-bootstrap.sh \
+  && echo "sh /docker-bootstrap.sh" >> /etc/rc.local
 
 # 各種サービス起動
 RUN systemctl enable sshd.service \
